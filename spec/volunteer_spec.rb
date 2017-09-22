@@ -79,4 +79,52 @@ describe Volunteer do
       expect(Volunteer.all).to eq []
     end
   end
+
+  describe '.sort_by_name_descending' do
+    it 'allows a user to sort the volunteers by name descending' do
+      volunteer1 = Volunteer.new({:name => 'Joe', :project_id => 1, :hours => 0, :id => nil})
+      volunteer1.save
+      volunteer2 = Volunteer.new({:name => 'Zoe', :project_id => 1, :hours => 0, :id => nil})
+      volunteer2.save
+      volunteer3 = Volunteer.new({:name => 'Leo', :project_id => 1, :hours => 0, :id => nil})
+      volunteer3.save
+      expect(Volunteer.sort_by_name_descending).to eq [volunteer2, volunteer3, volunteer1]
+    end
+  end
+
+  describe '.sort_by_name_ascending' do
+    it 'allows a user to sort the volunteers by name ascending' do
+      volunteer1 = Volunteer.new({:name => 'Joe', :project_id => 1, :hours => 0, :id => nil})
+      volunteer1.save
+      volunteer2 = Volunteer.new({:name => 'Zoe', :project_id => 1, :hours => 0, :id => nil})
+      volunteer2.save
+      volunteer3 = Volunteer.new({:name => 'Leo', :project_id => 1, :hours => 0, :id => nil})
+      volunteer3.save
+      expect(Volunteer.sort_by_name_ascending).to eq [volunteer1, volunteer3, volunteer2]
+    end
+  end
+
+  describe '.sort_by_hours_descending' do
+    it 'allows a user to sort the volunteers by hours descending' do
+      volunteer1 = Volunteer.new({:name => 'Joe', :project_id => 1, :hours => 0, :id => nil})
+      volunteer1.save
+      volunteer2 = Volunteer.new({:name => 'Zoe', :project_id => 1, :hours => 56, :id => nil})
+      volunteer2.save
+      volunteer3 = Volunteer.new({:name => 'Leo', :project_id => 1, :hours => 23, :id => nil})
+      volunteer3.save
+      expect(Volunteer.sort_by_hours_descending).to eq [volunteer2, volunteer3, volunteer1]
+    end
+  end
+
+  describe '.sort_by_hours_ascending' do
+    it 'allows a user to sort the volunteers by name ascending' do
+      volunteer1 = Volunteer.new({:name => 'Joe', :project_id => 1, :hours => 0, :id => nil})
+      volunteer1.save
+      volunteer2 = Volunteer.new({:name => 'Zoe', :project_id => 1, :hours => 56, :id => nil})
+      volunteer2.save
+      volunteer3 = Volunteer.new({:name => 'Leo', :project_id => 1, :hours => 23, :id => nil})
+      volunteer3.save
+      expect(Volunteer.sort_by_hours_ascending).to eq [volunteer1, volunteer3, volunteer2]
+    end
+  end
 end

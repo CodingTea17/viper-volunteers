@@ -14,7 +14,43 @@ class Volunteer
     queried_volunteers.each do |vol|
       volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i, :hours => vol['hours'].to_i))
     end
-    volunteers.sort_by {|vol| vol.name}
+    volunteers
+  end
+
+  def self.sort_by_hours_ascending
+    queried_volunteers = DB.exec("SELECT * FROM volunteers ORDER BY hours ASC;")
+    volunteers = []
+    queried_volunteers.each do |vol|
+      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i, :hours => vol['hours'].to_i))
+    end
+    volunteers
+  end
+
+  def self.sort_by_hours_descending
+    queried_volunteers = DB.exec("SELECT * FROM volunteers ORDER BY hours DESC;")
+    volunteers = []
+    queried_volunteers.each do |vol|
+      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i, :hours => vol['hours'].to_i))
+    end
+    volunteers
+  end
+
+  def self.sort_by_name_ascending
+    queried_volunteers = DB.exec("SELECT * FROM volunteers ORDER BY name ASC;")
+    volunteers = []
+    queried_volunteers.each do |vol|
+      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i, :hours => vol['hours'].to_i))
+    end
+    volunteers
+  end
+
+  def self.sort_by_name_descending
+    queried_volunteers = DB.exec("SELECT * FROM volunteers ORDER BY name DESC;")
+    volunteers = []
+    queried_volunteers.each do |vol|
+      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i, :hours => vol['hours'].to_i))
+    end
+    volunteers
   end
 
   def self.find(id)

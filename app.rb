@@ -15,6 +15,30 @@ get('/') do
   erb(:index)
 end
 
+get('/sort_by_name_ascending') do
+  @projects = Project.all
+  @volunteers = Volunteer.sort_by_name_ascending
+  erb(:index)
+end
+
+get('/sort_by_name_descending') do
+  @projects = Project.all
+  @volunteers = Volunteer.sort_by_name_descending
+  erb(:index)
+end
+
+get('/sort_by_hours_ascending') do
+  @projects = Project.all
+  @volunteers = Volunteer.sort_by_hours_descending
+  erb(:index)
+end
+
+get('/sort_by_hours_descending') do
+  @projects = Project.all
+  @volunteers = Volunteer.sort_by_hours_ascending
+  erb(:index)
+end
+
 post('/new_project') do
   new_proj = Project.new(:title => params['title'])
   new_proj.save
@@ -47,7 +71,7 @@ delete('/project/delete/:id') do
 end
 
 post('/new_volunteer') do
-  new_vol = Volunteer.new(:name => params['name'], :project_id => params['project_id'])
+  new_vol = Volunteer.new(:name => params['name'], :project_id => params['project_id'], :hours => 0) # All volunteers start with 0 hours
   new_vol.save
   redirect('/')
 end
@@ -64,6 +88,6 @@ get('/volunteer/update/:id') do
 end
 
 patch('/volunteer/update/:id') do
-  Volunteer.find(params[:id]).update({:name => params['name'], :project_id => params['project_id']})
+  Volunteer.find(params[:id]).update({:name => params['name'], :project_id => params['project_id'], :hours => params['hours']})
   redirect('/')
 end
