@@ -1,5 +1,5 @@
 class Project
-  attr_reader :id, :name
+  attr_reader :id, :title
 
   def initialize(attr)
     @title = attr[:title]
@@ -16,25 +16,30 @@ class Project
   end
 
   def self.find(id)
-    found_proj = DB.exec("SELECT * FROM projects WHERE id = #{id};")[0]
-    Project.new(:title => found_proj['title'], :id => found_proj['id'].to_i))
+    found_proj = DB.exec("SELECT * FROM projects WHERE id = #{id};").first
+    Project.new(:title => found_proj['title'], :id => found_proj['id'].to_i)
   end
 
   def save
-    DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING ID;")[0].to_i
+    @id = DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING ID;").first['id'].to_i
   end
 
-  def .==(a_project)
+  def ==(a_project)
     @title.==(a_project.title) and @id.==(a_project.id)
   end
 
   def volunteers
-    DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
+    queried_proj_vols = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
+    volunteers = []
+    queried_proj_vols.each do |vol|
+      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i))
+    end
+    volunteers.sort_by {|vol| vol.name}
   end
 
   def update(updated_project)
     @title = updated_project[:title]
-    DB.exec("UPDATE projects SET name = '#{@title}' WHERE id = #{@id};")
+    DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
   end
 
   def delete

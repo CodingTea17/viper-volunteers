@@ -17,15 +17,15 @@ class Volunteer
   end
 
   def self.find(id)
-    found_vol = DB.exec("SELECT * FROM volunteers WHERE id = #{id};")[0]
+    found_vol = DB.exec("SELECT * FROM volunteers WHERE id = #{id};").first
     Volunteer.new(:name => found_vol['name'], :project_id => found_vol['project_id'].to_i, :id => found_vol['id'].to_i)
   end
 
   def save
-    DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}',#{@id}) RETURNING ID;")[0].to_i
+    @id = DB.exec("INSERT INTO volunteers (name, project_id) VALUES ('#{@name}', '#{@project_id}') RETURNING ID;").first['id'].to_i
   end
 
-  def .==(a_volunteer)
+  def ==(a_volunteer)
     @name.==(a_volunteer.name) and @project_id.==(a_volunteer.project_id) and @id.==(a_volunteer.id)
   end
 end
