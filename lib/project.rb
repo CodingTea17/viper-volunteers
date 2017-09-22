@@ -32,7 +32,7 @@ class Project
     queried_proj_vols = DB.exec("SELECT * FROM volunteers WHERE project_id = #{@id};")
     volunteers = []
     queried_proj_vols.each do |vol|
-      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :id => vol['id'].to_i))
+      volunteers.push(Volunteer.new(:name => vol['name'], :project_id => vol['project_id'].to_i, :hours => vol['hours'].to_i, :id => vol['id'].to_i))
     end
     volunteers.sort_by {|vol| vol.name}
   end

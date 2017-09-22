@@ -17,7 +17,7 @@ describe Project do
     it 'returns the id of the project after saving project' do
       project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
       project.save
-      expect(project.id).to be_an_instance_of Fixnum # While Fixnum is considered depreciated in 2.4, Integer can throw an error for older versions of ruby (2.2 & 2.3 confirmed). Fun story on our 2-day project this past week we used Integer the first day, but we had to switch back to Fixnum because we had unknowingly switched from an iMac that used 2.4 to an iMac that used 2.2.  
+      expect(project.id).to be_an_instance_of Fixnum # While Fixnum is considered depreciated in 2.4, Integer can throw an error for older versions of ruby (2.2 & 2.3 confirmed). Fun story on our 2-day project this past week we used Integer the first day, but we had to switch back to Fixnum because we had unknowingly switched from an iMac that used 2.4 to an iMac that used 2.2.
     end
   end
 
@@ -65,9 +65,9 @@ describe Project do
     it 'returns all volunteers for a specific project' do
       project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
       project.save
-      volunteer1 = Volunteer.new({:name => 'Jasmine', :project_id => project.id, :id => nil})
+      volunteer1 = Volunteer.new({:name => 'Jasmine', :project_id => project.id, :hours => 0, :id => nil})
       volunteer1.save
-      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => project.id, :id => nil})
+      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => project.id, :hours => 0, :id => nil})
       volunteer2.save
       expect(project.volunteers).to eq [volunteer1, volunteer2]
     end
