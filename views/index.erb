@@ -1,0 +1,116 @@
+<div id="content" class="row">
+  <div id="project-col" class=col>
+    <div class="card bg-dark">
+      <div class="card-header">
+        Create a New Project
+      </div>
+      <div class="card-body">
+        <form action="/new_project" method="post">
+          <div class="form-group">
+            <label id="project-label" for="title">Enter a Project Title:</label>
+              <input id="project-input" name="title" class="form-control form-control-lg" type="text" placeholder="Ex. Clean up City Central Park" required>
+          </div>
+          <button type="submit" id="create-project" class="btn btn-success btn-lg btn-block">Create Project</button>
+        </form>
+      </div>
+    </div>
+    <% if @projects.any? %>
+    <div class="card bg-dark">
+      <div class="card-header">
+        Current Projects
+      </div>
+      <div class="card-body">
+        <table class="table table-hover table-bordered">
+          <thead class="thead">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th># of Volunteers</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @projects.each_with_index do |proj, i| %>
+              <tr class="table-light">
+                <th class="align-middle" scope="row"><%= i + 1 %></th>
+                <td class="align-middle"><%= proj.title %></td>
+                <td class="align-middle"><%= proj.volunteers.count %></td>
+                <td style="text-align: center;">
+                  <a href="/projects/update/<%= proj.id %>">
+                    <button class="btn btn-warning btn-block" type="button">Update</button>
+                  </a>
+                </td>
+                <td style="text-align: center;">
+                  <a href="/projects/delete/<%= proj.id %>">
+                    <button class="btn btn-danger btn-block" type="button">Delete</button>
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    <div id="volunteer-col" class="col">
+      <div class="card bg-dark">
+        <div class="card-header">
+          Add a New Volunteer
+        </div>
+        <div class="card-body">
+          <form action="/new_volunteer" method="post">
+            <div class="form-group">
+              <label id="volunteer-label" for="name">Enter the New Volunteer's Name:</label>
+                <input id="volunteer-input" name="name" class="form-control form-control-lg" type="text" placeholder="Ex. Hiro Nakamura" required>
+            </div>
+            <button type="submit" id="create-project" class="btn btn-success btn-lg btn-block">Add Volunteer</button>
+          </form>
+        </div>
+      </div>
+      <% if @volunteers.any? %>
+        <div class="card bg-dark">
+          <div class="card-header">
+            Active Volunteers
+          </div>
+          <div class="card-body">
+            <table class="table table-hover table-bordered">
+              <thead class="thead">
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @volunteers.each_with_index do |vol, i| %>
+                  <tr class="table-light">
+                    <th class="align-middle" scope="row"><%= i + 1 %></th>
+                    <td class="align-middle"><%= vol.name %></td>
+                    <td class="align-middle" style="text-align: center;">
+                      <a href="/volunteers/add_proj/<%= vol.id %>">
+                        <button class="btn btn-info btn-block" type="button">Assign a Project</button>
+                      </a>
+                    </td>
+                    <td style="text-align: center;">
+                      <a href="/volunteers/update/<%= vol.id %>">
+                        <button class="btn btn-warning btn-block" type="button">Update</button>
+                      </a>
+                    </td>
+                    <td style="text-align: center;">
+                      <a href="/volunteers/delete/<%= vol.id %>">
+                        <button class="btn btn-danger btn-block" type="button">Delete</button>
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

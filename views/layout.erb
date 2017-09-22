@@ -3,20 +3,15 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Muli:400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
     <title>Viper Volunteers Inc.</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <a class="navbar-brand" href="\home">Viper Volunteers Inc.</a>
-          </div>
-        </div>
-      </div>
+    <nav class="navbar navbar-dark bg-dark sticky-top">
+      <a class="navbar-brand" href="\">Viper Volunteers Inc.</a>
     </nav>
-    <div id="main" class="container">
+    <div id="main" class="container-fluid">
     <%= yield %>
     </div>
     <footer class="footer navbar-dark bg-dark">

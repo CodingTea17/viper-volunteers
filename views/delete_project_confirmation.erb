@@ -1,0 +1,18 @@
+<div class="row justify-content-md-center" id="content">
+  <div class="col-4">
+    <div class="alert alert-danger" role="alert">
+      You are about to delete the volunteer project <%= @project.title %>. This change is permanent. Click 'DELETE' below to confirm. Click 'CANCEL' to return to the homepage.
+      <div class="row justify-content-md-center" id="choice-row"s>
+          <div class="col-4">
+            <form action="/projects/delete/<%= @project.id %>" method="post">
+              <input name="_method" type="hidden" value="delete">
+              <button class="btn btn-danger btn-block" type="submit">DELETE</button>
+            </form>
+          </div>
+          <div class="col-4">
+            <a href="/"><button class="btn btn-primary btn-block" type="button">CANCEL</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

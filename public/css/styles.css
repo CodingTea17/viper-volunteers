@@ -1,0 +1,55 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  overflow-y: scroll;
+}
+header {
+  height: 60px;
+}
+a:hover {
+  text-decoration: none;
+}
+label {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+tbody {
+  color: #000000;
+}
+.navbar-brand {
+  margin-left: 3em !important;
+  font-size: 2em;
+  font-family: 'Muli', sans-serif;
+  font-weight: 900;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    clear:both;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    color: white;
+}
+.card {
+  margin-bottom: 2em;
+  color: #eeeeee;
+}
+.card-header {
+  font-family: 'Muli', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.container-fluid {
+  padding-left: 8em !important;
+  padding-right: 8em !important;
+}
+#content {
+  margin-top: 2em;
+}
+#choice-row {
+  margin-top: 3em;
+}
+/*#volunteer-col {
+  margin-left: 4em;
+}*/
