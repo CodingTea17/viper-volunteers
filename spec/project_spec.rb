@@ -90,4 +90,16 @@ describe Project do
       expect(Project.all).to eq []
     end
   end
+
+  describe '#total_hours' do
+    it 'returns all volunteers for a specific project' do
+      project = Project.new({:title => 'Teaching Kids to Code', :id => nil})
+      project.save
+      volunteer1 = Volunteer.new({:name => 'Jasmine', :project_id => project.id, :hours => 56, :id => nil})
+      volunteer1.save
+      volunteer2 = Volunteer.new({:name => 'Joe', :project_id => project.id, :hours => 44, :id => nil})
+      volunteer2.save
+      expect(project.total_hours).to eq 100
+    end
+  end
 end

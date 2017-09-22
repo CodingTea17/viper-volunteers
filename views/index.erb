@@ -26,6 +26,7 @@
               <th>#</th>
               <th>Title</th>
               <th># of Volunteers</th>
+              <th>Total Hours</th>
               <th></th>
             </tr>
           </thead>
@@ -35,6 +36,7 @@
                 <th class="align-middle" scope="row"><%= i + 1 %></th>
                 <td class="align-middle"><%= proj.title %></td>
                 <td class="align-middle"><%= proj.volunteers.count %></td>
+                <td class="align-middle"><%= proj.total_hours %></td>
                 <td style="text-align: center;">
                   <a id="<%= proj.title %>" href="/project/details/<%= proj.id %>">
                     <button class="btn btn-primary btn-block" type="button">View Details</button>

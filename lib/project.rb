@@ -37,6 +37,15 @@ class Project
     volunteers.sort_by {|vol| vol.name}
   end
 
+  def total_hours
+    queried_hours = DB.exec("SELECT hours FROM volunteers WHERE project_id = #{@id};")
+    hours = 0
+    queried_hours.each do |hour|
+      hours += hour['hours'].to_i
+    end
+    hours
+  end
+
   def update(updated_project)
     @title = updated_project[:title]
     DB.exec("UPDATE projects SET title = '#{@title}' WHERE id = #{@id};")
