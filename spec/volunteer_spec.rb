@@ -54,4 +54,22 @@ describe Volunteer do
       expect(Volunteer.find(volunteer1.id)).to eq volunteer1
     end
   end
+
+  describe '#update' do
+    it 'allows a user to update a volunteer' do
+      volunteer = Volunteer.new({:name => 'Leo', :project_id => 1, :id => nil})
+      volunteer.save
+      volunteer.update({:name => 'Leo the Lion', :project_id => 1, :id => nil})
+      expect(volunteer.name).to eq 'Leo the Lion'
+    end
+  end
+
+  context '#delete' do
+    it 'allows a user to delete a volunteer' do
+      volunteer = Volunteer.new({:name => 'Bobert',:project_id => 1, :id => nil})
+      volunteer.save
+      volunteer.delete
+      expect(Volunteer.all).to eq []
+    end
+  end
 end
