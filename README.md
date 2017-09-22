@@ -1,4 +1,4 @@
-# _Viper Volunteers_
+# _Viper Volunteers 🐍_
 
 #### _This application allows a nonprofit to manage/track ongoing projects and volunteers, 9/22/2017_
 
