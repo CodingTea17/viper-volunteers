@@ -27,7 +27,8 @@
               <th>Title</th>
               <th># of Volunteers</th>
               <th></th>
-              <th></th>
+              <!-- <th></th>
+              <th></th> -->
             </tr>
           </thead>
           <tbody>
@@ -37,15 +38,20 @@
                 <td class="align-middle"><%= proj.title %></td>
                 <td class="align-middle"><%= proj.volunteers.count %></td>
                 <td style="text-align: center;">
-                  <a href="/projects/update/<%= proj.id %>">
+                  <a id="<%= proj.title %>" href="/project/details/<%= proj.id %>">
+                    <button class="btn btn-primary btn-block" type="button">View Details</button>
+                  </a>
+                </td>
+                <!-- <td style="text-align: center;">
+                  <a href="/project/update/<%= proj.id %>">
                     <button class="btn btn-warning btn-block" type="button">Update</button>
                   </a>
                 </td>
                 <td style="text-align: center;">
-                  <a href="/projects/delete/<%= proj.id %>">
+                  <a href="/project/delete/<%= proj.id %>">
                     <button class="btn btn-danger btn-block" type="button">Delete</button>
                   </a>
-                </td>
+                </td> -->
               </tr>
             <% end %>
           </tbody>
@@ -64,7 +70,15 @@
               <label id="volunteer-label" for="name">Enter the New Volunteer's Name:</label>
                 <input id="volunteer-input" name="name" class="form-control form-control-lg" type="text" placeholder="Ex. Hiro Nakamura" required>
             </div>
-            <button type="submit" id="create-project" class="btn btn-success btn-lg btn-block">Add Volunteer</button>
+            <div class="form-group">
+              <label for="project_id">Assign a Project</label>
+              <select class="form-control" name='project_id' type='text'>
+                <% @projects.each() do |proj| %>
+                  <option value="<%= proj.id %>"> <%= proj.title %> </option>
+                <% end %>
+              </select>
+            </div>
+            <button type="submit" id="create-volunteer" class="btn btn-success btn-lg btn-block">Add Volunteer</button>
           </form>
         </div>
       </div>
@@ -79,9 +93,10 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
+                  <th>Assigned Project</th>
                   <th></th>
-                  <th></th>
-                  <th></th>
+                  <!-- <th></th>
+                  <th></th> -->
                 </tr>
               </thead>
               <tbody>
@@ -89,21 +104,22 @@
                   <tr class="table-light">
                     <th class="align-middle" scope="row"><%= i + 1 %></th>
                     <td class="align-middle"><%= vol.name %></td>
-                    <td class="align-middle" style="text-align: center;">
-                      <a href="/volunteers/add_proj/<%= vol.id %>">
-                        <button class="btn btn-info btn-block" type="button">Assign a Project</button>
+                    <td class="align-middle"><%= Project.find(vol.project_id).title %></td>
+                    <td style="text-align: center;">
+                      <a id="<%= vol.name %>" href="/volunteer/details/<%= vol.id %>">
+                        <button class="btn btn-primary btn-block" type="button">View Details</button>
                       </a>
                     </td>
-                    <td style="text-align: center;">
-                      <a href="/volunteers/update/<%= vol.id %>">
+                    <!-- <td style="text-align: center;">
+                      <a href="/volunteer/update/<%= vol.id %>">
                         <button class="btn btn-warning btn-block" type="button">Update</button>
                       </a>
                     </td>
                     <td style="text-align: center;">
-                      <a href="/volunteers/delete/<%= vol.id %>">
+                      <a href="/volunteer/delete/<%= vol.id %>">
                         <button class="btn btn-danger btn-block" type="button">Delete</button>
                       </a>
-                    </td>
+                    </td> -->
                   </tr>
                 <% end %>
               </tbody>
@@ -113,4 +129,5 @@
       <% end %>
     </div>
   <% end %>
+</div>
 </div>

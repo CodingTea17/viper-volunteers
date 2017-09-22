@@ -1,0 +1,71 @@
+<div id="content" class="row">
+  <div id="project-col" class=col>
+    <div class="card bg-dark">
+      <div class="card-header">
+        <%= @project.title %>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover table-bordered">
+          <thead class="thead">
+            <tr>
+              <th>Title</th>
+              <th># of Volunteers</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr class="table-light">
+                <td class="align-middle"><%= @project.title %></td>
+                <td class="align-middle"><%= @project.volunteers.count %></td>
+                <td style="text-align: center;">
+                  <a href="/project/update/<%= @project.id %>">
+                    <button class="btn btn-warning btn-block" type="button">Edit Project</button>
+                  </a>
+                </td>
+                <td style="text-align: center;">
+                  <a href="/project/delete/<%= @project.id %>">
+                    <button class="btn btn-danger btn-block" type="button">Delete</button>
+                  </a>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    <% if @project.volunteers.any? %>
+    <div class="col">
+      <div class="card bg-dark">
+        <div class="card-header">
+          Volunteers Assigned to <%= @project.title %>
+        </div>
+        <div class="card-body">
+          <table class="table table-hover table-bordered">
+            <thead class="thead">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @project.volunteers.each_with_index do |vol, i| %>
+                <tr class="table-light">
+                  <th class="align-middle" scope="row"><%= i + 1 %></th>
+                  <td class="align-middle"><%= vol.name %></td>
+                  <td class="align-middle" style="text-align: center;">
+                    <a href="/volunteer/details/<%= vol.id %>">
+                      <button class="btn btn-primary btn-block" type="button" id="<%= vol.name %>">View Details</button>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

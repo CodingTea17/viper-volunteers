@@ -28,4 +28,14 @@ class Volunteer
   def ==(a_volunteer)
     @name.==(a_volunteer.name) and @project_id.==(a_volunteer.project_id) and @id.==(a_volunteer.id)
   end
+
+  def update(updated_volunteer)
+    @name = updated_volunteer[:name]
+    @project_id = updated_volunteer[:project_id]
+    DB.exec("UPDATE volunteers SET name = '#{@name}', project_id = '#{@project_id}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM volunteers WHERE id = #{@id};")
+  end
 end

@@ -21,23 +21,49 @@ post('/new_project') do
   redirect('/')
 end
 
-get('/projects/update/:id') do
+get('/project/details/:id') do
+  @project = Project.find(params[:id])
+  erb(:project_details)
+end
+
+get('/project/update/:id') do
   @project = Project.find(params[:id])
   erb(:update_project)
 end
 
-get('/projects/delete/:id') do
+patch('/project/update/:id') do
+  Project.find(params[:id]).update({:title => params['title']})
+  redirect('/')
+end
+
+get('/project/delete/:id') do
   @project = Project.find(params[:id])
   erb(:delete_project_confirmation)
 end
 
-delete('/projects/delete/:id') do
+delete('/project/delete/:id') do
   Project.find(params[:id]).delete
   redirect('/')
 end
 
 post('/new_volunteer') do
-  new_vol = Volunteer.new(:name => params['name'], :project_id => 0)
+  new_vol = Volunteer.new(:name => params['name'], :project_id => params['project_id'])
   new_vol.save
+  redirect('/')
+end
+
+get('/volunteer/details/:id') do
+  @volunteer = Volunteer.find(params[:id])
+  erb(:volunteer_details)
+end
+
+get('/volunteer/update/:id') do
+  @volunteer = Volunteer.find(params[:id])
+  @projects = Project.all
+  erb(:update_volunteer)
+end
+
+patch('/volunteer/update/:id') do
+  Volunteer.find(params[:id]).update({:name => params['name'], :project_id => params['project_id']})
   redirect('/')
 end

@@ -12,7 +12,7 @@ class Project
     queried_projects.each do |proj|
       projects.push(Project.new(:title => proj['title'], :id => proj['id'].to_i))
     end
-    projects.sort_by {|proj| proj.title}
+    projects.sort_by {|proj| proj.volunteers.count}
   end
 
   def self.find(id)
