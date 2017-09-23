@@ -91,3 +91,8 @@ patch('/volunteer/update/:id') do
   Volunteer.find(params[:id]).update({:name => params['name'], :project_id => params['project_id'], :hours => params['hours']})
   redirect('/')
 end
+
+delete('/volunteer/delete/:id') do
+  Volunteer.find(params[:id]).delete
+  redirect('/')
+end

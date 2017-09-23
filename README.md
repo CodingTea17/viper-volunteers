@@ -23,6 +23,15 @@
 
 ### For a Live Version of The Site
 [Click Here](https://viper-volunteers.herokuapp.com)
+_Heroku created a database for me when I connected my project and pushed to its remote repo. However, it was empty and I had no clue how to access it. After sifting through (and attempting to replicate) dozens of ActiveRecord solutions (I don't get to learn that until next week...) I came across a way to access the database remotely with `heroku pg:psql`. Once I was connected I created the necessary tables for the project. Unfortunately, my database was one of many in a swarm of randomly assigned db names (ex. 'zaqygorqumgsve') and I couldn't do a simple `PG.connect` as I had learned to do for local postgres dbs. After a lot of searching I came across a way to use the `DATABASE_URL` environment variable Heroku provides. Adding this chunk of code (deleting the old DB variable) to my app.rb makes the whole thing work!!_
+
+```ruby
+require 'uri'
+
+uri = URI.parse(ENV['DATABASE_URL'])
+
+DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
+```
 
 ### Support and contact details
 _If you have any questions, concerns, or suggestions feel free to shoot me an email: dawson.mortenson@gmail.com_

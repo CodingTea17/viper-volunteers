@@ -26,9 +26,10 @@
                 </a>
               </td>
               <td style="text-align: center;">
-                <a href="/volunteer/delete/<%= @volunteer.id %>">
-                  <button class="btn btn-danger btn-block" type="button">Delete</button>
-                </a>
+                <form action="/volunteer/delete/<%= @volunteer.id %>" method="post">
+                  <input name="_method" type="hidden" value="delete">
+                  <button class="btn btn-danger btn-block" type="submit">Delete</button>
+                </form>
               </td>
             </tr>
           </tbody>
