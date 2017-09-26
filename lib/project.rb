@@ -52,6 +52,9 @@ class Project
   end
 
   def delete
+    volunteers.each do |vol|
+      vol.delete
+    end
     DB.exec("DELETE FROM projects WHERE id = #{@id};")
   end
 end
